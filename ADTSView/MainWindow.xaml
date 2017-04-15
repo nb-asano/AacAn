@@ -1,0 +1,70 @@
+﻿<Window x:Class="ADTSView.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ADTSView"
+        mc:Ignorable="d"
+        Title="ADTSView" Height="400" Width="579" Icon="note_icon.ico">
+    <Grid>
+        <Menu x:Name="menu" VerticalAlignment="Top">
+            <MenuItem Header="ファイル(_F)">
+                <MenuItem Header="開く(_O)..." InputGestureText="Ctrl+O" Click="MenuItem_F_O_Click" />
+                <MenuItem Header="保存(_S)..." InputGestureText="Ctrl+S" Click="MenuItem_F_S_Click" />
+                <Separator />
+                <MenuItem Header="終了(_X)" InputGestureText="Alt+F4" Click="MenuItem_F_X_Click" />
+            </MenuItem>
+            <MenuItem Header="表示(_V)">
+                <MenuItem Header="設定(_N)..." Click="MenuItem_V_N_Click" />
+            </MenuItem>
+            <MenuItem Header="ヘルプ(_H)">
+                <MenuItem Header="バージョン(_A)" Click="MenuItem_H_A_Click" />
+            </MenuItem>
+        </Menu>
+        <DataGrid x:Name="dataGrid" Margin="10,23,258,9.5" IsReadOnly="True" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="FrameNo" Width="60" Binding="{Binding No, StringFormat=D2}" />
+                <DataGridTextColumn Header="Offset" Width="60" Binding="{Binding Offset}" />
+                <DataGridTextColumn Header="Time" Width="48" Binding="{Binding Time}" />
+                <DataGridTextColumn Header="Duration" Width="36" Binding="{Binding Duration}" />
+                <DataGridTextColumn Header="Size" Width="36" Binding="{Binding Size}" />
+                <DataGridTextColumn Header="kbps" Width="48" Binding="{Binding Kbps}" />
+                <DataGridTextColumn Header="ID" Width="24" Binding="{Binding ID}" />
+                <DataGridTextColumn Header="Protection" Width="24" Binding="{Binding ErrProtection}" />
+                <DataGridTextColumn Header="Profile" Width="24" Binding="{Binding Profile}" />
+                <DataGridTextColumn Header="FS" Width="40" Binding="{Binding Fs}" />
+                <DataGridTextColumn Header="Private" Width="24" Binding="{Binding Private}" />
+                <DataGridTextColumn Header="Ch" Width="20" Binding="{Binding Ch}" />
+                <DataGridTextColumn Header="Original" Width="24" Binding="{Binding Original}" />
+                <DataGridTextColumn Header="Copyright" Width="20" Binding="{Binding CopyRight}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <TabControl x:Name="tabControl" HorizontalAlignment="Right" Margin="0,24,10,10.5" Width="243">
+            <TabItem Header="ファイル情報">
+                <Grid Background="#FFE5E5E5">
+                    <Label x:Name="label1" Content="総フレーム数" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="textBoxTotalFrame" HorizontalAlignment="Left" Height="23" Margin="107,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+                    <Label x:Name="label2" Content="総再生時間" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="textBoxDuration" HorizontalAlignment="Left" Height="23" Margin="107,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+                    <Label x:Name="label3" Content="平均ビットレート" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="textBoxBitRate" HorizontalAlignment="Left" Height="23" Margin="107,75,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+                    <Label x:Name="label4" Content="サンプリングレート" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="textBoxFs" HorizontalAlignment="Left" Height="23" Margin="107,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+                    <Label x:Name="label5" Content="チャンネル数" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="textBoxCh" HorizontalAlignment="Left" Height="23" Margin="107,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+                    <Label x:Name="label6" Content="プロファイル" HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="textBoxProfile" HorizontalAlignment="Left" Height="23" Margin="107,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+                    <Label x:Name="label7" Content="最大ビットレート" HorizontalAlignment="Left" Margin="10,196,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="textBoxMaxBitRate" HorizontalAlignment="Left" Height="23" Margin="107,199,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+                    <Label x:Name="label8" Content="ビットレート偏差" HorizontalAlignment="Left" Margin="10,227,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="textBoxBitrateStDev" HorizontalAlignment="Left" Height="23" Margin="107,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+                    <Label x:Name="labelUni" Content="" HorizontalAlignment="Left" Margin="10,258,0,0" VerticalAlignment="Top"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="フレーム情報">
+                <Grid Background="#FFE5E5E5">
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
