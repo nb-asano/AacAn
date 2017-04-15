@@ -134,5 +134,23 @@ namespace ADTSView
         }
 
         #endregion
+
+        private void Window_PreviewDragOver(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop, true)) {
+                e.Effects = DragDropEffects.Copy;
+            } else {
+                e.Effects = DragDropEffects.None;
+            }
+            e.Handled = true;
+        }
+
+        private void Window_Drop(object sender, DragEventArgs e)
+        {
+            string[] files = e.Data.GetData(DataFormats.FileDrop) as string[];
+            if (files != null) {
+
+            }
+        }
     }
 }

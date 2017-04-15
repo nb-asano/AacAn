@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ADTSView"
         mc:Ignorable="d"
-        Title="ADTSView" Height="400" Width="579" Icon="note_icon.ico">
+        Title="ADTSView" Height="400" Width="579" Icon="note_icon.ico" AllowDrop="True" PreviewDragOver="Window_PreviewDragOver" Drop="Window_Drop">
     <Grid>
         <Menu x:Name="menu" VerticalAlignment="Top">
             <MenuItem Header="ファイル(_F)">
