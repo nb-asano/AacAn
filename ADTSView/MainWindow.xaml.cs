@@ -39,13 +39,24 @@ namespace ADTSView
             setTitle(m_Parser.FilePath);
         }
 
+        private void openFile(string filePath)
+        {
+            var res = openAdtsFile(filePath);
+            m_Parser = res.Obj;
+            if (res.Result == 0) {
+                changeFileView(m_Parser);
+            } else {
+                MessageBox.Show("ADTS解析に失敗しました。", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
         #region 表示関連
 
         /// <summary>
         /// 描画対象ファイルの変更。ファイル変更時の描画ルート
         /// </summary>
         /// <param name="parser">分析済みファイル</param>
-        private void ChangeAdtsFile(ADTSParser parser)
+        private void changeFileView(ADTSParser parser)
         {
             this.dataGrid.ItemsSource = createViewerList(parser);
             textBoxTotalFrame.Text = parser.List.Count.ToString();
@@ -98,13 +109,7 @@ namespace ADTSView
             ofd.FileName = "";
             ofd.Filter = "AACファイル(*.aac)|*.aac|ADTSファイル(*.adts)|*.adts|全てのファイル(*.*)|*.*";
             if (ofd.ShowDialog() == true) {
-                var res = openAdtsFile(ofd.FileName);
-                m_Parser = res.Obj;
-                if (res.Result == 0) {
-                    ChangeAdtsFile(m_Parser);
-                } else {
-                    MessageBox.Show("ADTS解析に失敗しました。", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                openFile(ofd.FileName);
             }
         }
 
@@ -135,6 +140,8 @@ namespace ADTSView
 
         #endregion
 
+        #region その他のイベントハンドラ
+
         private void Window_PreviewDragOver(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop, true)) {
@@ -148,9 +155,19 @@ namespace ADTSView
         private void Window_Drop(object sender, DragEventArgs e)
         {
             string[] files = e.Data.GetData(DataFormats.FileDrop) as string[];
-            if (files != null) {
-
+            if (files != null && files.Length > 0) {
+                openFile(files[0]);
             }
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            string[] files = System.Environment.GetCommandLineArgs();
+            if (files.Length > 1) {
+                openFile(files[1]);
+            }
+        }
+
+        #endregion
     }
 }
